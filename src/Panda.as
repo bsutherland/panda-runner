@@ -7,7 +7,7 @@ package
 	
 		public const MAX_VEL:uint = 100;
 		
-		[Embed(source = "../img/panda_frames.png")] private var ImgA:Class;
+		[Embed(source = "../img/panda_frames_2.png")] private var ImgA:Class;
 		[Embed(source = "../snd/step_down.mp3")] private var SndDown:Class;
 		[Embed(source = "../snd/step_up.mp3")] private var SndUp:Class;
 		
@@ -36,6 +36,9 @@ package
 				} else {
 					stepDownSnd.play();
 				}
+			} else {
+				stepUpSnd.stop();
+				stepDownSnd.stop();
 			}
 		}
 		
