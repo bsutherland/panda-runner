@@ -4,9 +4,19 @@ package
 
 	public class PlayState extends FlxState
 	{
+		public var player:Panda;
+		
 		override public function create():void
 		{
-			add(new FlxText(0,0,100,"Hello, World!")); //adds a 100x20 text field at position 0,0 (upper left)
+			FlxG.bgColor = 0xff009900;
+			player = new Panda(FlxG.width / 2, FlxG.height / 2);
+			add(player);
+			add(new FlxText(0, 0, 100, "Tomato Boots"));
+		}
+		
+		override public function update():void
+		{
+			super.update();
 		}
 	}
 }
