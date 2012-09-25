@@ -8,31 +8,24 @@ package
 		public const DASH_CHANCE:Number = 0.001;
 		public const DASH_TIME:Number = 0.5;
 		public const SIZE:uint = 13;
+		public const RUNNING:String = "running";
+		public const STANDING:String = "standing";
 		
 		[Embed(source = "../img/bison_cropped.png")] private var ImgA:Class;
 		[Embed(source = "../snd/goatbah.mp3")] private var SndBah:Class;
-		
-		private var stopAt:uint;
-		
+	
 		public function Bison(X:int, Y:int) {
 			super(X, Y);
 			loadGraphic(ImgA, true, true, SIZE, SIZE);	// animated, reversable
-			addAnimation("running", [0, 1], 8, true);
-			addAnimation("standing", [0], 0, false);
-			play("standing");
+			addAnimation(RUNNING, [0, 1], 8, true);
+			addAnimation(STANDING, [0], 0, false);
+			play(STANDING);
 			facing = (FlxG.random() < 0.5) ? LEFT : RIGHT;
-		}
-		
-		public function isRunning():Boolean {
-			return "running" == _curAnim.name;
+			color = 0xcc3300; // regular ranga bison
 		}
 		
 		override public function update():void {				
-			if (!isRunning()) {
-				if (FlxG.random() < DASH_CHANCE) {
-					dash();
-				}
-			}
+			runAi();
 			super.update();
 			if (x > FlxG.width - width)
 				x = FlxG.width - width;
@@ -42,24 +35,36 @@ package
 				y = FlxG.height - height;
 			else if (y < 0)
 				y = 0;			
+		}		
+		
+		public function isRunning():Boolean {
+			return RUNNING == _curAnim.name;
+		}		
+		
+		protected function runAi():void {
+			if (!isRunning()) { // Artificial unintelligence
+				if (FlxG.random() < DASH_CHANCE) {
+					FlxG.play(SndBah);
+					velocity.x = FlxG.random() * MAX_VEL - MAX_VEL / 2;
+					velocity.y = FlxG.random() * MAX_VEL - MAX_VEL / 2;
+					dash(DASH_TIME, halt);
+				}
+			}			
+		}
+		
+		protected function dash(time:Number, callback:Function):void {			
+			play(RUNNING);
+			facing = velocity.x < 0 ? LEFT : RIGHT;
+			var stop:FlxTimer = new FlxTimer();
+			stop.start(time, 1, callback);
 		}
 		
 		protected function halt(t:FlxTimer):void {
 			velocity.x = 0;
 			velocity.y = 0;
-			play("standing");
+			play(STANDING);
 			t.stop();
 			t.destroy();			
-		}
-		
-		protected function dash():void {
-			FlxG.play(SndBah);
-			velocity.x = FlxG.random() * MAX_VEL - MAX_VEL / 2;
-			velocity.y = FlxG.random() * MAX_VEL - MAX_VEL / 2;
-			play("running");
-			facing = velocity.x < 0 ? LEFT : RIGHT;
-			var stop:FlxTimer = new FlxTimer();
-			stop.start(DASH_TIME, 1, halt);
 		}
 	}
 

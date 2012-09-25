@@ -16,18 +16,21 @@ package
 		
 		override public function create():void {
 			FlxG.bgColor = 0xff009900;
+			coins = 0;
 			createHerd();
 			player = new Panda(FlxG.width / 2, FlxG.height / 2);
 			add(player);
 			statusTxt = new FlxText(0, 0, FlxG.width);
 			add(statusTxt);
-			coins = 0;
+			updateStatus();
 		}
 		
 		protected function createHerd():void {
 			herd = new FlxGroup(HERD_SIZE);
 			for (var i:uint = 0; i < HERD_SIZE; i++) {
-				var bison:Bison = new Bison(
+				var r:Number = FlxG.random();
+				var species:Class = r < 0.8 ? Bison : SilverBison;
+				var bison:Bison = new species(
 					FlxG.random() * (FlxG.width),
 					FlxG.random() * (FlxG.height));
 				herd.add(bison);
