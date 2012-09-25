@@ -6,7 +6,7 @@ package
 	
 		public const MAX_VEL:uint = 100;
 		
-		[Embed(source = "../img/panda_frames_2.png")] private var ImgA:Class;
+		[Embed(source = "../img/panda_cropped.png")] private var ImgA:Class;
 		[Embed(source = "../snd/step_down.mp3")] private var SndDown:Class;
 		[Embed(source = "../snd/step_up.mp3")] private var SndUp:Class;
 		
@@ -15,7 +15,7 @@ package
 		
 		public function Panda(X:int, Y:int) {
 			super(X, Y);
-			loadGraphic(ImgA, true, true);	// animated, reversable
+			loadGraphic(ImgA, true, true, 10, 16);	// animated, reversable
 			addAnimation("walking", [0, 1], 4, true);
 			addAnimation("standing", [0], 0, false);
 			addAnimationCallback(animationCallback);
