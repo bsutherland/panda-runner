@@ -57,7 +57,7 @@ package
 			velocity.x = FlxG.random() * MAX_VEL - MAX_VEL / 2;
 			velocity.y = FlxG.random() * MAX_VEL - MAX_VEL / 2;
 			play("running");
-			facing = velocity.x < 0 ? RIGHT : LEFT;
+			facing = velocity.x < 0 ? LEFT : RIGHT;
 			var stop:FlxTimer = new FlxTimer();
 			stop.start(DASH_TIME, 1, halt);
 		}

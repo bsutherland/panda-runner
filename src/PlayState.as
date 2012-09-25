@@ -42,9 +42,9 @@ package
 		
 		protected function gotcha(bison:Bison, playa:Panda):void {
 			if (bison.facing == playa.facing) {
-				asplode(playa, bison, Heart);
-			} else {
 				asplode(bison, playa, Coin);
+			} else {
+				asplode(playa, bison, Heart);
 			}
 			updateStatus();
 		}
