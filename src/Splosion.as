@@ -3,8 +3,7 @@ package
 	import org.flixel.FlxEmitter;
 	import org.flixel.FlxG;
 	
-	public class Splosion extends FlxEmitter 
-	{
+	public class Splosion extends FlxEmitter {
 		
 		public function Splosion(X:int, Y:int, pClass:Class) {
 			super(X, Y, 3 + FlxG.random() * 3);

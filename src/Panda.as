@@ -2,8 +2,7 @@ package
 {
 	import org.flixel.*;
 	
-	public class Panda extends FlxSprite
-	{
+	public class Panda extends FlxSprite {
 	
 		public const MAX_VEL:uint = 100;
 		
@@ -14,8 +13,7 @@ package
 		public var stepUpSnd:FlxSound;
 		public var stepDownSnd:FlxSound;
 		
-		public function Panda(X:int, Y:int)
-		{
+		public function Panda(X:int, Y:int) {
 			super(X, Y);
 			loadGraphic(ImgA, true, true);	// animated, reversable
 			addAnimation("walking", [0, 1], 4, true);
@@ -28,8 +26,7 @@ package
 			stepDownSnd.loadEmbedded(SndDown, false);
 		}
 	
-		public function animationCallback(name:String, frame_no:uint, frame_idx:uint):void
-		{
+		public function animationCallback(name:String, frame_no:uint, frame_idx:uint):void {
 			if ("walking" == name) {
 				if (frame_idx % 2 == 1) {
 					stepUpSnd.play();
@@ -42,8 +39,7 @@ package
 			}
 		}
 		
-		override public function update():void
-		{
+		override public function update():void {
 			velocity.x = velocity.y = 0;
 			if (FlxG.keys.LEFT) {
 				facing = LEFT;
