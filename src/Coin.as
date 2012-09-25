@@ -18,9 +18,9 @@ package
 			if (y > FlxG.height) {
 				FlxG.play(SndBling, 0.5);
 				kill();
-			}
+				(FlxG.state as PlayState).pennyDropped();
+			}			
 		}
-
 	}
 
 }

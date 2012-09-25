@@ -12,14 +12,16 @@ package
 		public var herd:FlxGroup;
 		public var splosionSnd:FlxSound;
 		public var statusTxt:FlxText;
+		public var coins:uint;
 		
 		override public function create():void {
 			FlxG.bgColor = 0xff009900;
 			createHerd();
 			player = new Panda(FlxG.width / 2, FlxG.height / 2);
 			add(player);
-			statusTxt = new FlxText(0, 0, 100);
+			statusTxt = new FlxText(0, 0, FlxG.width);
 			add(statusTxt);
+			coins = 0;
 		}
 		
 		protected function createHerd():void {
@@ -40,7 +42,7 @@ package
 		
 		protected function gotcha(bison:Bison, playa:Panda):void {
 			if (bison.facing == playa.facing) {
-				asplode(playa, bison, Coin);
+				asplode(playa, bison, Heart);
 			} else {
 				asplode(bison, playa, Coin);
 			}
@@ -48,7 +50,8 @@ package
 		}
 		
 		protected function updateStatus():void {
-			statusTxt.text = "Herd size: " + herd.countLiving();
+			statusTxt.text = "Herd size: " + herd.countLiving()
+			               + "\nCoins: " + coins;
 		}
 		
 		protected function asplode(loser:FlxSprite, winna:FlxSprite, img:Class):void {
@@ -57,6 +60,11 @@ package
 			loser.kill();	
 			add(splosion);
 			splosion.start(true, 1000);	
+		}
+		
+		public function pennyDropped():void {
+			coins++;
+			updateStatus();
 		}
 	}
 }
