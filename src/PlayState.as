@@ -20,9 +20,17 @@ package
 			createHerd();
 			player = new Panda(FlxG.width / 2, FlxG.height / 2);
 			add(player);
-			statusTxt = new FlxText(0, 0, FlxG.width);
-			add(statusTxt);
+			createStatusDisplay();
 			updateStatus();
+		}
+		
+		protected function createStatusDisplay():void {
+			var sk:FlxSprite = new Skull(); sk.x = 2; sk.y = 3;
+			var cn:FlxSprite = new Coin();  cn.x = 2; cn.y = 13;
+			add(sk);
+			add(cn);
+			statusTxt = new FlxText(12, 0, FlxG.width);	
+			add(statusTxt);
 		}
 		
 		protected function createHerd():void {
@@ -53,8 +61,7 @@ package
 		}
 		
 		protected function updateStatus():void {
-			statusTxt.text = "Herd size: " + herd.countLiving()
-			               + "\nCoins: " + coins;
+			statusTxt.text = herd.countLiving() + "\n" + coins;
 		}
 		
 		protected function asplode(loser:FlxSprite, winna:FlxSprite, img:Class):void {
