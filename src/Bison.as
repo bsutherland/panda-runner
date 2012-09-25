@@ -7,16 +7,16 @@ package
 		public const MAX_VEL:uint = 150;
 		public const DASH_CHANCE:Number = 0.001;
 		public const DASH_TIME:Number = 0.5;
-		public const SIZE:uint = 16;
+		public const SIZE:uint = 13;
 		
-		[Embed(source = "../img/bison_frames.png")] private var ImgA:Class;
+		[Embed(source = "../img/bison_cropped.png")] private var ImgA:Class;
 		[Embed(source = "../snd/goatbah.mp3")] private var SndBah:Class;
 		
 		private var stopAt:uint;
 		
 		public function Bison(X:int, Y:int) {
 			super(X, Y);
-			loadGraphic(ImgA, true, true);	// animated, reversable
+			loadGraphic(ImgA, true, true, SIZE, SIZE);	// animated, reversable
 			addAnimation("running", [0, 1], 8, true);
 			addAnimation("standing", [0], 0, false);
 			play("standing");

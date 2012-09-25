@@ -3,8 +3,7 @@ package
 	import org.flixel.FlxParticle;
 	import org.flixel.FlxG;
 	
-	public class Coin extends FlxParticle 
-	{
+	public class Coin extends FlxParticle {
 		[Embed(source = "../img/coin.png")] private var ImgCoin:Class;	
 		[Embed(source = "../snd/bling.mp3")] private var SndBling:Class;
 		
