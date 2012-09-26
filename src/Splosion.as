@@ -5,8 +5,8 @@ package
 	
 	public class Splosion extends FlxEmitter {
 		
-		public function Splosion(X:int, Y:int, pClass:Class) {
-			super(X, Y, 3 + FlxG.random() * 3);
+		public function Splosion(X:int, Y:int, pClass:Class, n:uint) {
+			super(X, Y, n);
 			x = X;
 			y = Y;
 			setXSpeed(-75, 75);

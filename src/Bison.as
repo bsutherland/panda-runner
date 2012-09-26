@@ -10,6 +10,7 @@ package
 		public const SIZE:uint = 13;
 		public const RUNNING:String = "running";
 		public const STANDING:String = "standing";
+		public var coins:uint;
 		
 		[Embed(source = "../img/bison_cropped.png")] private var ImgA:Class;
 		[Embed(source = "../snd/goatbah.mp3")] private var SndBah:Class;
@@ -22,6 +23,7 @@ package
 			play(STANDING);
 			facing = (FlxG.random() < 0.5) ? LEFT : RIGHT;
 			color = 0xcc3300; // regular ranga bison
+			coins = 3 + FlxG.random() * 3; // 3 to 5 coins
 		}
 		
 		override public function update():void {				

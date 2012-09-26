@@ -10,6 +10,7 @@ package
 		public function SilverBison(X:int, Y:int) {
 			super(X, Y);
 			color = 0xcccccc;
+			coins = 5 + FlxG.random() * 4;	// 5 to 8 coins
 			madDash(null);
 		}
 		

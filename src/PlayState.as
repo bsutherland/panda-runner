@@ -53,9 +53,9 @@ package
 		
 		protected function gotcha(bison:Bison, playa:Panda):void {
 			if (bison.facing == playa.facing) {
-				asplode(bison, playa, Coin);
+				asplode(bison, playa, Coin, bison.coins);
 			} else {
-				asplode(playa, bison, Heart);
+				asplode(playa, bison, Heart, 10);
 			}
 			updateStatus();
 		}
@@ -64,9 +64,9 @@ package
 			statusTxt.text = herd.countLiving() + "\n" + coins;
 		}
 		
-		protected function asplode(loser:FlxSprite, winna:FlxSprite, img:Class):void {
+		protected function asplode(loser:FlxSprite, winna:FlxSprite, img:Class, n:uint):void {
 			FlxG.play(SndExplode);
-			var splosion:Splosion = new Splosion(winna.x + winna.width / 2, winna.y, img);
+			var splosion:Splosion = new Splosion(winna.x + winna.width / 2, winna.y, img, n);
 			loser.kill();	
 			add(splosion);
 			splosion.start(true, 1000);	
