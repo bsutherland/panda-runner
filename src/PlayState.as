@@ -8,11 +8,16 @@ package
 		[Embed(source = "../img/heart.png")] private var ImgHeart:Class;
 		[Embed(source = "../snd/splosion.mp3")] private var SndExplode:Class;
 		
+		public var level:uint;
 		public var player:Panda;
 		public var herd:FlxGroup;
 		public var splosionSnd:FlxSound;
 		public var statusTxt:FlxText;
 		public var coins:uint;
+		
+		override public function PlayState(level:uint) {
+			this.level = level;
+		}
 		
 		override public function create():void {
 			FlxG.bgColor = 0xff009900;
@@ -75,6 +80,15 @@ package
 		public function pennyDropped():void {
 			coins++;
 			updateStatus();
+			if (herd.countLiving() < 1) {
+				new FlxTimer().start(5, 1, nextLevel);
+			}
+		}
+		
+		public function nextLevel(t:FlxTimer):void {
+			t.stop();
+			t.destroy();
+			FlxG.switchState(new IntermissionState(level + 1));
 		}
 	}
 }

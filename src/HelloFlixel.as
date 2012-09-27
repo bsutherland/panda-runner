@@ -6,7 +6,7 @@ package
 	public class HelloFlixel extends FlxGame {
 		public function HelloFlixel() {
 			// Use a zoom factor of two
-			super(320,240,TitleState,2);
+			super(320, 240, TitleState, 2);
 		}
 	}
 }

@@ -5,7 +5,7 @@ package
 	
 	public class SilverBison extends Bison 
 	{
-		public const MAD_DASH_TIME:Number = 1.0;
+		public const MAD_DASH_TIME:Number = 2.0;
 		
 		public function SilverBison(X:int, Y:int) {
 			super(X, Y);
