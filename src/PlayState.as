@@ -61,16 +61,20 @@ package
 		}
 		
 		override public function update():void {
-			FlxG.overlap(herd, player, gotcha);
+			if (!player.flickering) {
+				FlxG.overlap(herd, player, gotcha);
+			}
 			super.update();
 		}
 		
 		protected function gotcha(bison:Bison, playa:Panda):void {
 			if (bison.facing == playa.facing) {
 				asplode(bison, playa, Coin, bison.coins);
+				game.kills++;
 			} else {
 				asplode(playa, bison, Heart, 10);
-				new FlxTimer().start(5, 1, playerDied);
+				game.lives--;
+				new FlxTimer().start(4, 1, playerDied);
 			}
 			updateStatus();
 		}
@@ -78,20 +82,20 @@ package
 		protected function asplode(loser:FlxSprite, winna:FlxSprite, img:Class, n:uint):void {
 			FlxG.play(SndExplode);
 			var splosion:Splosion = new Splosion(winna.x + winna.width / 2, winna.y, img, n);
-			loser.kill();	
+			loser.kill();
+			loser.destroy();			
 			add(splosion);
-			splosion.start(true, 1000);	
+			splosion.start(true, 1000);
 		}
 		
 		// callbacks
 		
 		public function playerDied(t:FlxTimer):void {
 			t.stop(); t.destroy();
-			game.lives--;
 			if (game.lives > 0) {
 				spawnPlayer();
 			} else {
-				//FlxG.switchState(new GameOverState(game));
+				FlxG.switchState(new GameOverState(game));
 			}
 		}
 		
@@ -99,7 +103,8 @@ package
 			game.coins++;
 			updateStatus();
 			if (herd.countLiving() < 1) {
-				new FlxTimer().start(5, 1, nextLevel);
+				new FlxTimer().start(4, 1, nextLevel);
+				// play a little tune or something
 			}
 		}
 		
