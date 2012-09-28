@@ -7,36 +7,45 @@ package
 		public const HERD_SIZE:uint = 10;
 		[Embed(source = "../img/heart.png")] private var ImgHeart:Class;
 		[Embed(source = "../snd/splosion.mp3")] private var SndExplode:Class;
+		[Embed(source = "../img/panda_head.png")] private var ImgPandaHead:Class;
 		
-		public var level:uint;
 		public var player:Panda;
 		public var herd:FlxGroup;
 		public var splosionSnd:FlxSound;
 		public var statusTxt:FlxText;
-		public var coins:uint;
+		public var game:GameStruct;
 		
-		override public function PlayState(level:uint) {
-			this.level = level;
+		override public function PlayState(game:GameStruct) {
+			this.game = game;
 		}
 		
 		override public function create():void {
 			FlxG.bgColor = 0xff009900;
-			coins = 0;
 			createHerd();
-			player = new Panda(FlxG.width / 2, FlxG.height / 2);
-			add(player);
+			spawnPlayer();
 			createStatusDisplay();
 			updateStatus();
+		}
+		
+		protected function spawnPlayer():void {
+			player = new Panda(FlxG.width / 2, FlxG.height / 2);
+			add(player);
 		}
 		
 		protected function createStatusDisplay():void {
 			var sk:FlxSprite = new Skull(); sk.x = 2; sk.y = 3;
 			var cn:FlxSprite = new Coin();  cn.x = 2; cn.y = 13;
-			add(sk);
-			add(cn);
+			var ph:FlxSprite = new FlxSprite(); ph.loadGraphic(ImgPandaHead); ph.x = 2; ph.y = 23;
+			add(sk); add(cn); add(ph)
 			statusTxt = new FlxText(12, 0, FlxG.width);	
 			add(statusTxt);
 		}
+
+		protected function updateStatus():void {
+			statusTxt.text = herd.countLiving() + '\n'
+				+ game.coins + '\n'
+				+ game.lives;
+		}		
 		
 		protected function createHerd():void {
 			herd = new FlxGroup(HERD_SIZE);
@@ -61,12 +70,9 @@ package
 				asplode(bison, playa, Coin, bison.coins);
 			} else {
 				asplode(playa, bison, Heart, 10);
+				new FlxTimer().start(5, 1, playerDied);
 			}
 			updateStatus();
-		}
-		
-		protected function updateStatus():void {
-			statusTxt.text = herd.countLiving() + "\n" + coins;
 		}
 		
 		protected function asplode(loser:FlxSprite, winna:FlxSprite, img:Class, n:uint):void {
@@ -77,8 +83,20 @@ package
 			splosion.start(true, 1000);	
 		}
 		
+		// callbacks
+		
+		public function playerDied(t:FlxTimer):void {
+			t.stop(); t.destroy();
+			game.lives--;
+			if (game.lives > 0) {
+				spawnPlayer();
+			} else {
+				//FlxG.switchState(new GameOverState(game));
+			}
+		}
+		
 		public function pennyDropped():void {
-			coins++;
+			game.coins++;
 			updateStatus();
 			if (herd.countLiving() < 1) {
 				new FlxTimer().start(5, 1, nextLevel);
@@ -88,7 +106,8 @@ package
 		public function nextLevel(t:FlxTimer):void {
 			t.stop();
 			t.destroy();
-			FlxG.switchState(new IntermissionState(level + 1));
+			game.level++;
+			FlxG.switchState(new IntermissionState(game));
 		}
 	}
 }

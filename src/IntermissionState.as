@@ -8,20 +8,19 @@ package
 	public class IntermissionState extends FlxState {
 		
 		public const FADE_TIME:uint = 1;
-		public const SHOW_TIME:uint = 2;
-		public var level:uint;
+		public const SHOW_TIME:uint = 1;
+		public var game:GameStruct;
 		
-		override public function IntermissionState(level:uint) {
-			this.level = level;
+		override public function IntermissionState(game:GameStruct) {
+			this.game = game;
 		}
 		
 		override public function create():void {
 			FlxG.bgColor = 0xff000000;
-			var msg:FlxText = new FlxText(0, FlxG.height / 2, FlxG.width, "Level " + level);
+			var msg:FlxText = new FlxText(0, FlxG.height / 2, FlxG.width, "Level " + game.level);
 			msg.alignment = "center";
 			add(msg);
-			FlxG.flash(0xff000000, FADE_TIME, pauseTimer);
-			
+			FlxG.flash(0xff000000, FADE_TIME, pauseTimer);			
 		}
 		
 		public function pauseTimer():void {
@@ -35,7 +34,7 @@ package
 		}
 		
 		public function startLevel():void {
-			FlxG.switchState(new PlayState(level));
+			FlxG.switchState(new PlayState(game));
 		}
 	}
 

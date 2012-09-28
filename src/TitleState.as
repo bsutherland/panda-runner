@@ -17,7 +17,7 @@ package
 		}
 		override public function update():void {
 			if (FlxG.keys.SPACE) {
-				FlxG.switchState(new IntermissionState(1));
+				FlxG.switchState(new IntermissionState(new GameStruct()));
 			}
 		}
 	}
