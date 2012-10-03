@@ -6,12 +6,10 @@ package
 	
 	public class TitleState extends FlxState {
 		
-		[Embed(source = "../img/title.png")] private var ImgTitle:Class;
-		
 		override public function create():void {
 			FlxG.bgColor = 0xff000000;
 			var title:FlxSprite = new FlxSprite(0, 0);
-			title.loadGraphic(ImgTitle);
+			title.loadGraphic(Resources.ImgTitle);
 			FlxG.flash(0xffffffff, 1);			
 			add(title);
 		}

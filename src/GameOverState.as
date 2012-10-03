@@ -4,12 +4,13 @@ package
 	import org.flixel.FlxText;
 	import org.flixel.FlxG;
 	import org.flixel.FlxU;
+	import Resources;
 	
 	public class GameOverState extends FlxState {
 		// TODO: This needs to be animated and moar cool
 		// TODO: Refactor all embedded files into a single static class??
 		
-		[Embed(source = "../font/adore64.ttf", fontFamily = "Adore64", embedAsCFF = "false")] private var FontC64:Class;
+		//[Embed(source = "../font/adore64.ttf", fontFamily = "Adore64", embedAsCFF = "false")] private var FontC64:Class;
 		
 		protected var game:GameStruct;
 		protected const DEATH_NOTES:Array = [
@@ -32,7 +33,7 @@ package
 				FlxU.getRandom(DEATH_NOTES)+ ": " + game.kills);
 			msg.alignment = "left";
 			msg.font = "Adore64";
-			msg.size = 8;
+			msg.size = 10;
 			add(msg);
 		}
 	}

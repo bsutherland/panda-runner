@@ -3,12 +3,11 @@ package
 	import org.flixel.FlxParticle;
 	import org.flixel.FlxG;
 	
-	public class Heart extends FlxParticle {
-		[Embed(source = "../img/heart.png")] private var ImgHeart:Class;	
+	public class Heart extends FlxParticle {	
 		
 		public function Heart() {
 			super();
-			loadGraphic(ImgHeart);
+			loadGraphic(Resources.ImgHeart);
 		}
 		
 		override public function update():void {

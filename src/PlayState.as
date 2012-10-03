@@ -5,9 +5,6 @@ package
 	public class PlayState extends FlxState
 	{
 		public const HERD_SIZE:uint = 10;
-		[Embed(source = "../img/heart.png")] private var ImgHeart:Class;
-		[Embed(source = "../snd/splosion.mp3")] private var SndExplode:Class;
-		[Embed(source = "../img/panda_head.png")] private var ImgPandaHead:Class;
 		
 		public var player:Panda;
 		public var herd:FlxGroup;
@@ -35,7 +32,7 @@ package
 		protected function createStatusDisplay():void {
 			var sk:FlxSprite = new Skull(); sk.x = 2; sk.y = 3;
 			var cn:FlxSprite = new Coin();  cn.x = 2; cn.y = 13;
-			var ph:FlxSprite = new FlxSprite(); ph.loadGraphic(ImgPandaHead); ph.x = 2; ph.y = 23;
+			var ph:FlxSprite = new FlxSprite(); ph.loadGraphic(Resources.ImgPandaHead); ph.x = 2; ph.y = 23;
 			add(sk); add(cn); add(ph)
 			statusTxt = new FlxText(12, 0, FlxG.width);	
 			add(statusTxt);
@@ -80,7 +77,7 @@ package
 		}
 		
 		protected function asplode(loser:FlxSprite, winna:FlxSprite, img:Class, n:uint):void {
-			FlxG.play(SndExplode);
+			FlxG.play(Resources.SndExplode);
 			var splosion:Splosion = new Splosion(winna.x + winna.width / 2, winna.y, img, n);
 			loser.kill();
 			loser.destroy();			

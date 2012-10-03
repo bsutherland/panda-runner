@@ -1,6 +1,7 @@
 package  
 {
 	import org.flixel.*;
+	import Resources;
 	
 	public class Bison extends FlxSprite
 	{	
@@ -11,13 +12,10 @@ package
 		public const RUNNING:String = "running";
 		public const STANDING:String = "standing";
 		public var coins:uint;
-		
-		[Embed(source = "../img/bison_cropped.png")] private var ImgA:Class;
-		[Embed(source = "../snd/goatbah.mp3")] private var SndBah:Class;
-	
+
 		public function Bison(X:int, Y:int) {
 			super(X, Y);
-			loadGraphic(ImgA, true, true, SIZE, SIZE);	// animated, reversable
+			loadGraphic(Resources.ImgBisonAnim, true, true, SIZE, SIZE);	// animated, reversable
 			addAnimation(RUNNING, [0, 1], 8, true);
 			addAnimation(STANDING, [0], 0, false);
 			play(STANDING);
@@ -46,7 +44,7 @@ package
 		protected function runAi():void {
 			if (!isRunning()) { // Artificial unintelligence
 				if (FlxG.random() < DASH_CHANCE) {
-					FlxG.play(SndBah);
+					FlxG.play(Resources.SndBah);
 					velocity.x = FlxG.random() * MAX_VEL - MAX_VEL / 2;
 					velocity.y = FlxG.random() * MAX_VEL - MAX_VEL / 2;
 					dash(DASH_TIME, halt);

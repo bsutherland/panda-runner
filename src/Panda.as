@@ -5,25 +5,21 @@ package
 	public class Panda extends FlxSprite {
 	
 		public const MAX_VEL:uint = 100;
-		
-		[Embed(source = "../img/panda_cropped.png")] private var ImgA:Class;
-		[Embed(source = "../snd/step_down.mp3")] private var SndDown:Class;
-		[Embed(source = "../snd/step_up.mp3")] private var SndUp:Class;
-		
+	
 		public var stepUpSnd:FlxSound;
 		public var stepDownSnd:FlxSound;
 		
 		public function Panda(X:int, Y:int) {
 			super(X, Y);
-			loadGraphic(ImgA, true, true, 10, 16);	// animated, reversable
+			loadGraphic(Resources.ImgPandaAnim, true, true, 10, 16);	// animated, reversable
 			addAnimation("walking", [0, 1], 4, true);
 			addAnimation("standing", [0], 0, false);
 			addAnimationCallback(animationCallback);
 			play("walking");
 			stepUpSnd = new FlxSound();
-			stepUpSnd.loadEmbedded(SndUp, false);
+			stepUpSnd.loadEmbedded(Resources.SndStepUp, false);
 			stepDownSnd = new FlxSound();
-			stepDownSnd.loadEmbedded(SndDown, false);
+			stepDownSnd.loadEmbedded(Resources.SndStepDown, false);
 			flicker(3);	// start ethereal to allow player to get their bearings
 		}
 	
