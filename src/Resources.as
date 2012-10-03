@@ -17,6 +17,7 @@ package
 		[Embed(source = "../img/coin.png")] public static const ImgCoin:Class;
 		[Embed(source = "../img/bison_skull.png")] public static const ImgSkull:Class;		
 		
+		[Embed(source = "../snd/woosh.mp3")] public static const SndWoosh:Class;
 		[Embed(source = "../snd/goatbah.mp3")] public static const SndBah:Class;
 		[Embed(source = "../snd/step_down.mp3")] public static const SndStepDown:Class;
 		[Embed(source = "../snd/step_up.mp3")] public static const SndStepUp:Class;

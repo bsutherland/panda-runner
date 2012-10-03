@@ -20,7 +20,7 @@ package
 			stepUpSnd.loadEmbedded(Resources.SndStepUp, false);
 			stepDownSnd = new FlxSound();
 			stepDownSnd.loadEmbedded(Resources.SndStepDown, false);
-			flicker(3);	// start ethereal to allow player to get their bearings
+			flicker(2);	// start ethereal to allow player to get their bearings
 		}
 	
 		public function animationCallback(name:String, frame_no:uint, frame_idx:uint):void {

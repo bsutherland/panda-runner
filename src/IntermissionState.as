@@ -17,8 +17,10 @@ package
 		
 		override public function create():void {
 			FlxG.bgColor = 0xff000000;
-			var msg:FlxText = new FlxText(0, (FlxG.height - 8) / 2, FlxG.width, "Level " + game.level);
+			var msg:FlxText = new FlxText(0, (FlxG.height - 16) / 2, FlxG.width, "Level " + game.level);
+			msg.font = "Adore64";
 			msg.alignment = "center";
+			msg.size = 8;
 			add(msg);
 			FlxG.flash(0xff000000, FADE_TIME, pauseTimer);
 		}
