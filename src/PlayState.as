@@ -4,18 +4,18 @@ package
 
 	public class PlayState extends FlxState
 	{
-		public const HERD_SIZE:uint = 10;
+		public const HERD_SIZE:uint = 8;
 		
-		public var player:Panda;
-		public var herd:FlxGroup;
-		public var splosionSnd:FlxSound;
-		public var statusTxt:FlxText;
-		public var game:GameStruct;
+		protected var player:Panda;
+		protected var herd:FlxGroup;
+		protected var splosionSnd:FlxSound;
+		protected var statusTxt:FlxText;
+		protected var game:GameStruct;
 		
 		override public function PlayState(game:GameStruct) {
 			this.game = game;
 		}
-		
+
 		override public function create():void {
 			FlxG.bgColor = 0xff009900;
 			createHerd();
@@ -45,16 +45,21 @@ package
 		}		
 		
 		protected function createHerd():void {
-			herd = new FlxGroup(HERD_SIZE);
+			herd = new FlxGroup(HERD_SIZE + game.level);
+			for (var j:uint = 0; j < game.level; j++) {
+				createCritter(herd, SilverBison);
+			}			
 			for (var i:uint = 0; i < HERD_SIZE; i++) {
-				var r:Number = FlxG.random();
-				var species:Class = r < 0.8 ? Bison : SilverBison;
+				createCritter(herd, Bison);
+			}
+			add(herd);
+		}
+		
+		protected function createCritter(herd:FlxGroup, species:Class):void {
 				var bison:Bison = new species(
 					FlxG.random() * (FlxG.width),
 					FlxG.random() * (FlxG.height));
-				herd.add(bison);
-			}
-			add(herd);
+				herd.add(bison);			
 		}
 		
 		override public function update():void {
