@@ -103,6 +103,10 @@ package
 		
 		public function pennyDropped():void {
 			game.coins++;
+			if (0 == game.coins % 10) {
+				FlxG.play(Resources.Snd1Up);
+				game.lives++;
+			}
 			updateStatus();
 			if (herd.countLiving() < 1) {
 				new FlxTimer().start(4, 1, nextLevel);

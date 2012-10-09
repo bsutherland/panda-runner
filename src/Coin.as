@@ -13,7 +13,7 @@ package
 		override public function update():void {
 			super.update();
 			if (y > FlxG.height) {
-				FlxG.play(Resources.SndBling, 0.5);
+				FlxG.play(Resources.SndBling, 0.3);
 				kill();
 				(FlxG.state as PlayState).pennyDropped();
 			}			

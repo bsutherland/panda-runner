@@ -25,7 +25,7 @@ package
 		override public function create():void {
 			FlxG.bgColor = 0xff000000;
 			var msg:FlxText = new FlxText(0, FlxG.height / 4, FlxG.width,
-			    "                 GAME OVER" + "\n\n" +
+			    "           *** GAME OVER ***" + "\n\n" +
 				"         Level Reached:   " + game.level + "\n\n" +
 				"         Coins Collected: " + game.coins + "\n\n" +
 				"         " + FlxU.getRandom(DEATH_NOTES)+ ": " + game.kills);
@@ -33,6 +33,7 @@ package
 			msg.font = "Adore64";
 			msg.size = 8;
 			add(msg);
+			FlxG.play(Resources.SndGameOver);
 		}
 	}
 }

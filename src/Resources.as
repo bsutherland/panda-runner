@@ -23,6 +23,9 @@ package
 		[Embed(source = "../snd/step_up.mp3")] public static const SndStepUp:Class;
 		[Embed(source = "../snd/splosion.mp3")] public static const SndExplode:Class;
 		[Embed(source = "../snd/bling.mp3")] public static const SndBling:Class;		
+		[Embed(source = "../snd/dadadadum.mp3")] public static const Snd1Up:Class;
+		[Embed(source = "../snd/start.mp3")] public static const SndStart:Class;
+		[Embed(source = "../snd/game_over.mp3")] public static const SndGameOver:Class;
 	
 	}
 
