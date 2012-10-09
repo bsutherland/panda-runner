@@ -24,11 +24,13 @@ package
 		
 		override public function create():void {
 			FlxG.bgColor = 0xff000000;
-			var msg:FlxText = new FlxText(0, FlxG.height / 4, FlxG.width,
-			    "           *** GAME OVER ***" + "\n\n" +
-				"         Level Reached:   " + game.level + "\n\n" +
-				"         Coins Collected: " + game.coins + "\n\n" +
-				"         " + FlxU.getRandom(DEATH_NOTES)+ ": " + game.kills);
+			var fmt:String = 
+			    "          *** GAME OVER ***\n\n" +
+				"       Level Reached:     %3d\n\n" +
+				"       Coins Collected:   %3d\n\n" +
+				"       %-22s %3d";
+			var fmtd:String = printf(fmt, game.level, game.coins, FlxU.getRandom(DEATH_NOTES)+":", game.kills);
+			var msg:FlxText = new FlxText(0, FlxG.height / 4, FlxG.width, fmtd);
 			msg.alignment = "left";
 			msg.font = "Adore64";
 			msg.size = 8;

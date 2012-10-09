@@ -31,11 +31,11 @@ package
 				starting = true;
 				txt.visible = false;
 				FlxG.play(Resources.SndStart);
-				FlxG.fade(0xff000000, 3, startGame);
+				FlxG.fade(0xff000000, 2.5, startGame);
 			}
 		}
 
-		function keyDown(e:KeyboardEvent):void {
+		public function keyDown(e:KeyboardEvent):void {
 			if (e.keyCode == 70) {
 				FlxG.play(Resources.Snd1Up);				
 				toggleFullscreen();
