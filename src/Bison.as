@@ -6,7 +6,7 @@ package
 	public class Bison extends FlxSprite
 	{	
 		public const MAX_VEL:uint = 150;
-		public const DASH_CHANCE:Number = 0.001;
+		public const DASH_CHANCE:Number = 0.002;
 		public const DASH_TIME:Number = 0.5;
 		public const SIZE:uint = 13;
 		public const RUNNING:String = "running";
@@ -21,7 +21,7 @@ package
 			play(STANDING);
 			facing = (FlxG.random() < 0.5) ? LEFT : RIGHT;
 			color = 0xcc3300; // regular ranga bison
-			coins = 3 + FlxG.random() * 3; // 3 to 5 coins
+			coins = 2 + FlxG.random() * 3; // 2 to 4 coins
 		}
 		
 		override public function update():void {				
@@ -44,7 +44,7 @@ package
 		protected function runAi():void {
 			if (!isRunning()) { // Artificial unintelligence
 				if (FlxG.random() < DASH_CHANCE) {
-					FlxG.play(Resources.SndBah);
+					FlxG.play(Resources.SndBah, 0.7);
 					velocity.x = FlxG.random() * MAX_VEL - MAX_VEL / 2;
 					velocity.y = FlxG.random() * MAX_VEL - MAX_VEL / 2;
 					dash(DASH_TIME, halt);

@@ -82,7 +82,7 @@ package
 		}
 		
 		protected function asplode(loser:FlxSprite, winna:FlxSprite, img:Class, n:uint):void {
-			FlxG.play(Resources.SndExplode);
+			FlxG.play(Resources.SndExplode, 0.7);
 			var splosion:Splosion = new Splosion(winna.x + winna.width / 2, winna.y, img, n);
 			loser.kill();
 			loser.destroy();			
@@ -103,7 +103,7 @@ package
 		
 		public function pennyDropped():void {
 			game.coins++;
-			if (0 == game.coins % 10) {
+			if (0 == game.coins % 100) {
 				FlxG.play(Resources.Snd1Up);
 				game.lives++;
 			}

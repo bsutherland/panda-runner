@@ -5,7 +5,8 @@ package
 	
 	public class SilverBison extends Bison 
 	{
-		public const MAD_DASH_TIME:Number = 2.0;
+		public const MAD_DASH_TIME:Number = 2.5;
+		public const MAX_DASH_VEL:uint = 100;
 		
 		public function SilverBison(X:int, Y:int) {
 			super(X, Y);
@@ -19,8 +20,8 @@ package
 		}
 		
 		protected function madDash(t:FlxTimer):void {
-			velocity.x = FlxG.random() * MAX_VEL - MAX_VEL / 2;
-			velocity.y = FlxG.random() * MAX_VEL - MAX_VEL / 2;
+			velocity.x = FlxG.random() * MAX_DASH_VEL - MAX_DASH_VEL / 2;
+			velocity.y = FlxG.random() * MAX_DASH_VEL - MAX_DASH_VEL / 2;
 			dash(MAD_DASH_TIME, madDash);
 			if (null != t) {
 				t.stop();
