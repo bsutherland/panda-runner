@@ -8,8 +8,8 @@
     <movie fps="30" />
     <movie width="640" />
     <movie height="480" />
-    <movie version="10" />
-    <movie minorVersion="1" />
+    <movie version="14" />
+    <movie minorVersion="0" />
     <movie platform="Flash Player" />
     <movie background="#FFFFFF" />
   </output>
@@ -73,7 +73,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\HelloFlixel.as" />
+    <compile path="src\PandaRunner.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
