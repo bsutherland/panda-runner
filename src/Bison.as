@@ -12,16 +12,22 @@ package
 		public const RUNNING:String = "running";
 		public const STANDING:String = "standing";
 		public var coins:uint;
+		
+		public const SECS_PREPARE_TO_RUN:Number = 1;
+		private var _secsUntilRun:Number;
+		private var _speechBubble:SpeechBubble;
 
 		public function Bison(X:int, Y:int) {
 			super(X, Y);
-			loadGraphic(Resources.ImgBisonAnim, true, true, SIZE, SIZE);	// animated, reversable
+			loadGraphic(Resources.ImgBisonAnim, true, true, SIZE, SIZE);	// animated, reversible
 			addAnimation(RUNNING, [0, 1], 8, true);
 			addAnimation(STANDING, [0], 0, false);
 			play(STANDING);
 			facing = (FlxG.random() < 0.5) ? LEFT : RIGHT;
 			color = 0xcc3300; // regular ranga bison
 			coins = 2 + FlxG.random() * 3; // 2 to 4 coins
+			_secsUntilRun = -1;
+			_speechBubble = null;
 		}
 		
 		override public function update():void {				
@@ -35,22 +41,52 @@ package
 				y = FlxG.height - height;
 			else if (y < 0)
 				y = 0;			
-		}		
+		}
+		
+		override public function kill():void {
+			if (null != _speechBubble) {
+				_speechBubble.killAndDestroy();
+			}
+			super.kill();
+		}
 		
 		public function isRunning():Boolean {
 			return RUNNING == _curAnim.name;
-		}		
+		}
+		
+		public function isIdling():Boolean {
+			return !isRunning() && _secsUntilRun < 0;
+		}
+		
+		protected function prepareToRun():void {
+			FlxG.play(Resources.SndBah, 0.7);
+			_speechBubble = new SpeechBubble();
+			_speechBubble.x = LEFT == facing ? x - _speechBubble.width : x + width;
+			_speechBubble.y = y;
+			_speechBubble.facing = facing;
+			FlxG.state.add(_speechBubble);
+			_secsUntilRun = SECS_PREPARE_TO_RUN;
+		}
 		
 		protected function runAi():void {
-			if (!isRunning()) { // Artificial unintelligence
+			if (isIdling()) { // Artificial unintelligence
 				if (FlxG.random() < DASH_CHANCE) {
-					FlxG.play(Resources.SndBah, 0.7);
-					velocity.x = FlxG.random() * MAX_VEL - MAX_VEL / 2;
-					velocity.y = FlxG.random() * MAX_VEL - MAX_VEL / 2;
-					dash(DASH_TIME, halt);
+					prepareToRun();
 				}
-			}			
+			} else if (_secsUntilRun >= 0) {
+				_secsUntilRun -= FlxG.elapsed;
+				if (_secsUntilRun < 0) {
+					_speechBubble.killAndDestroy();
+					randomDash();
+				}
+			}
 		}
+
+		protected function randomDash():void {
+			velocity.x = FlxG.random() * MAX_VEL - MAX_VEL / 2;
+			velocity.y = FlxG.random() * MAX_VEL - MAX_VEL / 2;
+			dash(DASH_TIME, halt);			
+		}		
 		
 		protected function dash(time:Number, callback:Function):void {			
 			play(RUNNING);

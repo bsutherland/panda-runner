@@ -6,7 +6,10 @@ package
 	public class PandaRunner extends FlxGame {
 		public function PandaRunner() {
 			// Use a zoom factor of two
-			super(320, 240, TitleState, 2);
+			// Use this for debugging
+			super(320, 240, QuickPlayState, 2);
+			// Use this for release
+			//super(320, 240, TitleState, 2);
 		}
 	}
 }

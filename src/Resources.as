@@ -16,6 +16,7 @@ package
 		[Embed(source = "../img/panda_head.png")] public static const ImgPandaHead:Class;
 		[Embed(source = "../img/coin.png")] public static const ImgCoin:Class;
 		[Embed(source = "../img/bison_skull.png")] public static const ImgSkull:Class;		
+		[Embed(source = "../img/speech.png")] public static const ImgSpeechBubble:Class;
 		
 		[Embed(source = "../snd/woosh.mp3")] public static const SndWoosh:Class;
 		[Embed(source = "../snd/goatbah.mp3")] public static const SndBah:Class;
