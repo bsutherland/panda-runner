@@ -18,8 +18,8 @@ package
 
 		override public function create():void {
 			FlxG.bgColor = 0xff009900;
-			createHerd();
 			spawnPlayer();
+			createHerd();
 			createStatusDisplay();
 			updateStatus();
 		}
@@ -27,6 +27,7 @@ package
 		protected function spawnPlayer():void {
 			player = new Panda(FlxG.width / 2, FlxG.height / 2);
 			add(player);
+			//FlxG._game.rotationZ = 180.0;
 		}
 		
 		protected function createStatusDisplay():void {
@@ -46,6 +47,9 @@ package
 		
 		protected function createHerd():void {
 			herd = new FlxGroup(HERD_SIZE + game.level);
+			for (var k:uint = 0; k < game.level - 1; k += 2) {
+				createCritter(herd, GoldBison);
+			}
 			for (var j:uint = 0; j < game.level; j++) {
 				createCritter(herd, SilverBison);
 			}			
@@ -56,10 +60,12 @@ package
 		}
 		
 		protected function createCritter(herd:FlxGroup, species:Class):void {
-				var bison:Bison = new species(
-					FlxG.random() * (FlxG.width),
-					FlxG.random() * (FlxG.height));
-				herd.add(bison);			
+			var bison:Bison = new species(
+				FlxG.random() * (FlxG.width),
+				FlxG.random() * (FlxG.height),
+				player
+			);
+			herd.add(bison);			
 		}
 		
 		override public function update():void {

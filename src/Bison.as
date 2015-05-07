@@ -13,11 +13,13 @@ package
 		public const STANDING:String = "standing";
 		public var coins:uint;
 		
+		protected var _player:FlxSprite;
+		
 		public const SECS_PREPARE_TO_RUN:Number = 1;
 		private var _secsUntilRun:Number;
 		private var _speechBubble:SpeechBubble;
 
-		public function Bison(X:int, Y:int) {
+		public function Bison(X:int, Y:int, player:FlxSprite) {
 			super(X, Y);
 			loadGraphic(Resources.ImgBisonAnim, true, true, SIZE, SIZE);	// animated, reversible
 			addAnimation(RUNNING, [0, 1], 8, true);
@@ -28,6 +30,7 @@ package
 			coins = 2 + FlxG.random() * 3; // 2 to 4 coins
 			_secsUntilRun = -1;
 			_speechBubble = null;
+			_player = player;
 		}
 		
 		override public function update():void {				
